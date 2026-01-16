@@ -25,6 +25,12 @@ Given a UI image containing multiple UI elements, the system should:
 ## Research on datasets (sample images of UI with tables). (Ongoing)
 ---
 ## Literature Review
+
+**Models**:
+- [LayoutLMv3](https://arxiv.org/abs/2204.083)
+- [DocLayout-YOLO](https://github.com/opendatalab/DocLayout-YOLO)
+**Datasets:**
+- [YashJain/UI-Elements-Detection-Dataset](https://huggingface.co/datasets/YashJain/UI-Elements-Detection-Dataset)
 ---
 ## Data for training, fine-tuning and Evaluate Models.
 ---
