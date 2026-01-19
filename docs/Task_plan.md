@@ -1,11 +1,11 @@
 # Task Plan
 - [x] Problem understanding and requirements analysis
-- [ ] Research on datasets (sample images of UI with tables). (*Ongoing*)
-- [ ] Literature review and Background research
-- [ ] Data for training, fine-tuning and Evaluate Models.
-- [ ] System Design and Architecture For Full Pipeline.
-- [ ] Implementation and Integration.
-- [ ] Testing and Validation.
+- [x] Research on datasets (sample images of UI with tables). (*Ongoing*)
+- [x] Literature review and Background research
+- [x] Data for training, fine-tuning and Evaluate Models.
+- [x] System Design and Architecture For Full Pipeline.
+- [x] Implementation and Integration.
+- [x] Testing and Validation.
 ---
 ## Problem understanding and requirements analysis
 ### 🧩 Problem Statement
