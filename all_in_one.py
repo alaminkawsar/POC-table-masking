@@ -1,11 +1,12 @@
 import os
 import cv2
-import easyocr
 import numpy as np
-from masking.mask_all_match_text import search_by_matcher
+import easyocr
 from ultralytics import YOLO
-from utils.drawing import annotate_all_extracted_texts, annotate_all_texts, annotate_targeted_texts, draw_box_on_all_texts, mask_all_extracted_texts
+
+from utils.drawing import annotate_targeted_texts, draw_box_on_all_texts, mask_all_extracted_texts
 from masking.masking_by_header import search_text_by_header
+from masking.mask_all_match_text import search_by_matcher
 
 class UIElementDetector:
   def __init__(self, model_path: str = "assets/best.pt"):
