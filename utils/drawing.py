@@ -96,8 +96,10 @@ def draw_box_on_all_texts(image_path: str, all_processed_data: list, draw_bbox: 
     plt.imshow(img_rgb)
     plt.axis('off')
     plt.title('Image with All Extracted Texts Annotated and Masked')
+    plt.savefig('annotated_all_texts.png', dpi=300, bbox_inches='tight')
+    # Save the figure to a file
+    # Display the plot (optional, but must come after savefig to avoid blank images)
     plt.show()
-    plt.savefig('annotated_all_texts.png')
     
 def mask_all_extracted_texts(image_path: str, all_processed_data: list, draw_bbox: bool = True, fill_bbox_white: bool = False):
     # Load the original image
@@ -187,8 +189,9 @@ def mask_all_extracted_texts(image_path: str, all_processed_data: list, draw_bbo
     plt.imshow(img_rgb)
     plt.axis('off')
     plt.title('Image with All Extracted Texts Annotated and Masked')
+    plt.savefig('annotated_all_extracted_texts.png', dpi=300, bbox_inches='tight')
+    # Save the figure to a file
     plt.show()
-    plt.savefig('annotated_all_extracted_texts.png')
 
 
 def annotate_targeted_texts(image_path: str, texts: list, draw_bbox: bool = True, fill_bbox_white: bool = False):
@@ -271,10 +274,9 @@ def annotate_targeted_texts(image_path: str, texts: list, draw_bbox: bool = True
     plt.imshow(img_rgb)
     plt.axis('off')
     plt.title('Image with All Extracted Texts Annotated and Masked')
+    plt.savefig('annotated_targeted_texts.png', dpi=300, bbox_inches='tight')
     plt.show()
-    plt.savefig('annotated_targeted_texts.png')
-    
-    
+
 def mask_text_regions(
     image_path: str,
     texts: List[MaskedText],
