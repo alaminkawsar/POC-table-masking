@@ -1,7 +1,5 @@
-```
-poetry add opencv-python easyocr
-```
+# POC-UI-Element-Masking
 
-```
-poetry run python src/main.py
-```
+### To run the full pipeline follow the command
+1. `pip install -r requirements.txt`
+2. `python main.py`

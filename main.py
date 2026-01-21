@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from data_extraction.data_extractor import DataExtractor
 from masking.masking import mask_texts_from_ocr_data
+from ocr.easy_ocr import EasyOCR
 
 def mask_text_in_image(image_path: str, texts_to_mask: list, output_path: str):
     """
@@ -34,14 +35,14 @@ def mask_text_in_image(image_path: str, texts_to_mask: list, output_path: str):
 def main():
     
     model_path = "assets/best.pt"
-    ocr_engine = easyocr.Reader(['en'])
+    ocr_engine = EasyOCR()
     data_extractor = DataExtractor(model_path, ocr_engine)
-    img_path = "16.JPG"
+    img_path = "src/images/ss-1.jpeg"
     processed_data = data_extractor.data_extraction_from_image(img_path)
     # annotate_all_texts(img_path, processed_data, draw_bbox=True, fill_bbox_white=False)
     # annotate_all_extracted_texts(img_path, processed_data, draw_bbox=True, fill_bbox_white=True)
 
-    header_text = "Address"
+    header_text = "Ship To"
     masked_image = mask_texts_from_ocr_data(
         img_path,
         processed_data,

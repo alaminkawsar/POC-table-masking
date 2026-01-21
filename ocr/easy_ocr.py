@@ -1,5 +1,5 @@
 import easyocr
-from base_ocr import BaseOCR
+from .base_ocr import BaseOCR
 
 class EasyOCR(BaseOCR):
     def __init__(self, lang_list=None, gpu=False):
@@ -15,14 +15,7 @@ class EasyOCR(BaseOCR):
         results = self.reader.readtext(image, detail=1)
         output = []
         for bbox, text, conf in results:
-            # bbox is [[x1, y1], [x2, y2], [x3, y3], [x4, y4]]
-            x_coords = [point[0] for point in bbox]
-            y_coords = [point[1] for point in bbox]
-            x = min(x_coords)
-            y = min(y_coords)
-            w = max(x_coords) - x
-            h = max(y_coords) - y
-            output.append((text, (x, y, w, h)))
+            output.append((text, bbox, conf))
         return output
 
     def detect_text_regions(self, image):

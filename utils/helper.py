@@ -101,12 +101,16 @@ def mask_text_regions(
 
     height, width = image.shape[:2]
 
-    for _, (x1, y1, x2, y2) in texts:
-        # Clamp bounding box to image boundaries (performance + safety)
-        x1 = max(0, min(x1, width - 1))
-        y1 = max(0, min(y1, height - 1))
-        x2 = max(0, min(x2, width))
-        y2 = max(0, min(y2, height))
+    for text_content, points in texts:
+        masked_text = "*" * (len(text_content) // 2) + "*" * (len(text_content) % 2)
+        x_coords = [p[0] for p in points]
+        y_coords = [p[1] for p in points]
+
+        # Calculate absolute coordinates by adding parent box offset
+        x1 = int(min(x_coords))
+        y1 = int(min(y_coords))
+        x2 = int(max(x_coords))
+        y2 = int(max(y_coords))
 
         if x2 <= x1 or y2 <= y1:
             continue

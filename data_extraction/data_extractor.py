@@ -12,7 +12,7 @@ class DataExtractor:
 
   def get_data_from_image(self, image_path: str):
     # Assign unique IDs to each extracted item and add placeholder for texts and header
-    extracted_data = self.ui_element_extractor.predict(image_path)
+    extracted_data = self.ui_element_extractor.detect_ui_elements(image_path)
     processed_data = []
     for i, item in enumerate(extracted_data):
         processed_item = {
@@ -52,7 +52,7 @@ class DataExtractor:
 
                 # Extract only the text from OCR results
                 extracted_texts = []
-                for (bbox, text, prob) in ocr_results:
+                for (text, bbox, prob) in ocr_results:
                     # EasyOCR bounding box format is [[x1, y1], [x2, y1], [x2, y2], [x1, y2]]
                     extracted_texts.append({"box": bbox, "text": text, "prob": prob})
 
