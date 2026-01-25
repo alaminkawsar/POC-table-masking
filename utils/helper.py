@@ -150,3 +150,48 @@ def _display_image(image) -> None:
     plt.axis("off")
     plt.title("Masked Text Regions")
     plt.show()
+    
+    
+import numpy as np
+
+def easyocr_bbox_to_xyxy(easyocr_bbox):
+    """Converts an EasyOCR bounding box format to (x_min, y_min, x_max, y_max)."""
+    # EasyOCR bbox format: [[x1, y1], [x2, y1], [x2, y2], [x1, y2]]
+    x_coords = [p[0] for p in easyocr_bbox]
+    y_coords = [p[1] for p in easyocr_bbox]
+    x_min = min(x_coords)
+    y_min = min(y_coords)
+    x_max = max(x_coords)
+    y_max = max(y_coords)
+    return (x_min, y_min, x_max, y_max)
+
+def compute_iou(boxA, boxB):
+    """Calculates the Intersection Over Union (IOU) of two bounding boxes.
+    Boxes are expected in (x_min, y_min, x_max, y_max) format.
+    """
+    # Determine the coordinates of the intersection rectangle
+    xA = max(boxA[0], boxB[0])
+    yA = max(boxA[1], boxB[1])
+    xB = min(boxA[2], boxB[2])
+    yB = min(boxA[3], boxB[3])
+
+    # Compute the area of intersection rectangle
+    inter_width = xB - xA
+    inter_height = yB - yA
+    if inter_width < 0 or inter_height < 0:
+        return 0.0
+
+    interArea = inter_width * inter_height
+
+    # Compute the area of both the prediction and ground-truth rectangles
+    boxAArea = (boxA[2] - boxA[0]) * (boxA[3] - boxA[1])
+    boxBArea = (boxB[2] - boxB[0]) * (boxB[3] - boxB[1])
+
+    # Compute the intersection over union by taking the intersection
+    # area and dividing it by the sum of prediction + ground-truth
+    # areas - the interesection area
+    iou = interArea / float(boxAArea + boxBArea - interArea)
+
+    # Return the IOU value
+    return iou
+
