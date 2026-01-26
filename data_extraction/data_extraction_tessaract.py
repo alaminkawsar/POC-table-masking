@@ -3,6 +3,7 @@ import os
 import cv2
 import numpy as np
 import pytesseract
+from .data_extractor import UIElementDetector
 
 class TessaractDataExtractor:
     def __init__(self, model_path: str):
