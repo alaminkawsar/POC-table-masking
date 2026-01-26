@@ -2,6 +2,7 @@
 import os
 import cv2
 import numpy as np
+import easyocr
 from detection.ui_detector import UIElementDetector
 from ocr.base_ocr import BaseOCR
 
@@ -89,7 +90,7 @@ class EasyOcrDataExtractor:
     # UI detection
     # -----------------------------
     def get_data_from_image(self, image_path: str):
-        extracted_data = self.ui_element_extractor.detect_ui_elements(image_path)
+        extracted_data = self.ui_element_extractor.predict(image_path)
         processed_data = []
 
         for i, item in enumerate(extracted_data):
