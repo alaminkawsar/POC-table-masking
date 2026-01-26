@@ -5,7 +5,7 @@ from data_extraction.data_extraction_tessaract import TessaractDataExtractor
 import easyocr
 from ultralytics import YOLO
 
-from utils import merge_ocr_data
+from utils.merge_ocr_data import merge_ocr_data
 from utils.drawing import annotate_targeted_texts, draw_box_on_all_texts, mask_all_extracted_texts
 from masking.masking_by_header import search_text_by_header
 from masking.mask_all_match_text import search_by_matcher
