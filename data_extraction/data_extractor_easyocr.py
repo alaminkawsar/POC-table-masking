@@ -108,6 +108,7 @@ class EasyOcrDataExtractor:
     def merge_horizontal_texts(
       self,
       texts,
+      h_type,
       line_threshold=8,
       max_gap_ratio=1.5
     ):
@@ -136,9 +137,14 @@ class EasyOcrDataExtractor:
               "y2": y2,
               "y_center": y_center
           })
-
-      # -------- Step 2: Sort (top → bottom, left → right) --------
-      items.sort(key=lambda i: (i["y_center"], i["x1"]))
+        # If the type is text_field, we need to sort by x1 first
+      if h_type == "text_field":
+        # Sort (left → right)
+        items.sort(key=lambda i: i["x1"])
+      else:
+        # Sort (top → bottom)
+        # Sort (top → bottom)
+        items.sort(key=lambda i: i["y_center"]) 
 
       lines = []
 
@@ -263,11 +269,12 @@ class EasyOcrDataExtractor:
                     "text": text,
                     "prob": prob
                 })
-
+                
+            h_type = item["type"]
             # 🔗 MERGE HORIZONTAL LINES HERE
-            # line_texts = self.merge_horizontal_texts(raw_texts)
+            line_texts = self.merge_horizontal_texts(raw_texts, h_type)
             # final_texts = self.merge_vertical_texts(line_texts)
-            item["texts"] = raw_texts
+            item["texts"] = line_texts
 
         # Sort the each texts to find the header
         # -------------------------------------
@@ -294,6 +301,11 @@ class EasyOcrDataExtractor:
         for item in processed_data:
             if item["texts"]:
                 item["header"] = item["texts"][0]["text"]
+                
+                # skip ':' character from header
+                if item["header"].endswith(":"):
+                    item["header"] = item["header"][:-1].strip()
+                    
                 item["texts"] = item["texts"][1:]
 
 

@@ -110,6 +110,7 @@ class TessaractDataExtractor:
     def merge_horizontal_texts(
       self,
       texts,
+      h_type,
       line_threshold=8,
       max_gap_ratio=1.5
     ):
@@ -139,8 +140,13 @@ class TessaractDataExtractor:
               "y_center": y_center
           })
 
-      # -------- Step 2: Sort (top → bottom, left → right) --------
-      items.sort(key=lambda i: (i["y_center"], i["x1"]))
+      if h_type == "text_field":
+        # Sort (left → right)
+        items.sort(key=lambda i: i["x1"])
+      else:
+        # Sort (top → bottom)
+        # Sort (top → bottom)
+        items.sort(key=lambda i: i["y_center"]) 
 
       lines = []
 
@@ -287,9 +293,9 @@ class TessaractDataExtractor:
                 })
 
             # 🔗 MERGE HORIZONTAL LINES HERE
-            # line_texts = self.merge_horizontal_texts(raw_texts)
+            line_texts = self.merge_horizontal_texts(raw_texts)
             # final_texts = self.merge_vertical_texts(line_texts)
-            item["texts"] = raw_texts
+            item["texts"] = line_texts
         # Sort the each texts to find the header
         # -------------------------------------
         
@@ -315,6 +321,11 @@ class TessaractDataExtractor:
         for item in processed_data:
             if item["texts"]:
                 item["header"] = item["texts"][0]["text"]
+                
+                # skip ':' character from header
+                if item["header"].endswith(":"):
+                    item["header"] = item["header"][:-1].strip()
+                    
                 item["texts"] = item["texts"][1:]
                 
            
