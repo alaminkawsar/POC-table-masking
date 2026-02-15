@@ -291,9 +291,10 @@ class TessaractDataExtractor:
                     "text": text,
                     "prob": conf / 100.0
                 })
+            h_type = item["type"]
 
             # 🔗 MERGE HORIZONTAL LINES HERE
-            line_texts = self.merge_horizontal_texts(raw_texts)
+            line_texts = self.merge_horizontal_texts(raw_texts, h_type)
             # final_texts = self.merge_vertical_texts(line_texts)
             item["texts"] = line_texts
         # Sort the each texts to find the header
