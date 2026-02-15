@@ -15,6 +15,7 @@ def normalize_text(text: str) -> str:
         '5': 's',
         '8': 'b',
         'h': 'n',
+        'o': 'c'
     }
 
     text = text.lower()
