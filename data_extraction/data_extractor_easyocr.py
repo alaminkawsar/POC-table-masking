@@ -294,7 +294,7 @@ class EasyOcrDataExtractor:
         for item in processed_data:
             if item["texts"]:
                 item["header"] = item["texts"][0]["text"]
-                item["texts"] = item["texts"][:]
+                item["texts"] = item["texts"][1:]
 
 
         return processed_data
