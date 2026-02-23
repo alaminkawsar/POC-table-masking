@@ -85,6 +85,7 @@ def masking_by_header(header_texts: list, processed_data, img_path, output_dir="
     cv2.imwrite(os.path.join(output_dir, f"masked_by_headers_{img_name}.png"), cv2.cvtColor(annotated, cv2.COLOR_RGB2BGR))
 
 def main(headers_text: list, image_path: str, model_path: str):
+    logger.info(f"Processing image: {image_path}")
     # Initialize OCR Data Extractors
     easy_ocr_dex = EasyOcrDataExtractor(model_path)
     tessaract_ocr_dex = TessaractDataExtractor(model_path)
