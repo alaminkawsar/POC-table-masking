@@ -162,10 +162,11 @@ def process_table_data(texts: list, det_box, image_path: str):
     # sort texts top to bottom
     texts.sort(key=lambda t: t["box"][0][1])  # Sort by y_min
     headers = []
+    removed_indices = []
+
     if new_word_boxes:
         first_box = new_word_boxes[0]
         # trace index which will remove later
-        removed_indices = []
         for i in range(len(texts)):
             text = texts[i]
             # print("Checking text:", text["text"], "with box:", text["box"])
