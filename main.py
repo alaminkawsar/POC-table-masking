@@ -32,10 +32,13 @@ def header_selection(processed_data, image_path):
                 # we will take help in morphological operation in that case
                 header, text_boxes = process_table_data(item["texts"], item["box"], image_path)
                 item["texts"] = text_boxes
-                    
-            item["header"] = remove_unnecessary_characters(item["texts"][0]["text"])
-            # print(f" Header: {item['header']} for type: {item['type']}")
-            item["texts"] = item["texts"][1:]
+                
+            try:    
+                item["header"] = remove_unnecessary_characters(item["texts"][0]["text"])
+                # print(f" Header: {item['header']} for type: {item['type']}")
+                item["texts"] = item["texts"][1:]
+            except Exception as e:
+                print(f"Error {e} while processing Image: {image_path}")
             
     return processed_data
 
